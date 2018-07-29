@@ -73,22 +73,25 @@
           </div>
         </div>
         <div class="hot-goods js-waterfull-wrap" data-src="">
-          <ul class="js-list js-lazy" data-src="">
-              <li v-for="list in lists" :key="list.id">
-                  <div class="goods-item">
-                    <a href="https://h5.youzan.com/v2/showcase/goods?alias=2fwig6rnqfq6m&amp;source=yzapp&amp;f_platform=yzapp">
-                      <div class="thumb img-box">
-                        <img class="fadeIn" :src="list.img">
-                      </div>
-                      <div class="detail">
-                        <div class="title">{{list.name}}</div>
-                        <div class="price">￥{{list.price}}</div>
-                      </div>
-                    </a>
+          <ul class="js-list js-lazy" data-src="" 
+          v-infinite-scroll="getLists" 
+          infinite-scroll-disabled="loading" 
+          infinite-scroll-distance="10">
+            <li v-for="list in lists" :key="list.id">
+              <div class="goods-item">
+                <a href="https://h5.youzan.com/v2/showcase/goods?alias=2fwig6rnqfq6m&amp;source=yzapp&amp;f_platform=yzapp">
+                  <div class="thumb img-box">
+                    <img class="fadeIn" :src="list.img">
                   </div>
-                </li>
+                  <div class="detail">
+                    <div class="title">{{list.name}}</div>
+                    <div class="price">￥{{list.price}}</div>
+                  </div>
+                </a>
+              </div>
+            </li>
           </ul>
-          <div class="loading-more">
+          <div class="loading-more" v-show="loading">
             <span></span>
           </div>
         </div>
