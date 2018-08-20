@@ -14,6 +14,7 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: utils.entries(),
   output: {
+    publicPath: './',
     path: config.build.assetsRoot,
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
