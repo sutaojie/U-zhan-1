@@ -4,11 +4,13 @@ import './index.css'
 import Vue from 'vue'
 import axios from 'axios'
 import url from 'js/api.js'
+import mixin from 'js/mixin.js'
 import { InfiniteScroll } from 'mint-ui';
 
 Vue.use(InfiniteScroll);
 
 import Foot from 'components/Foot'
+import Swipe from 'components/Swipe.vue'
 let app = new Vue({
   el:'#app',
   data:{
@@ -16,10 +18,18 @@ let app = new Vue({
     pageNum:1,
     pageSize:3,
     loading:false,
-    allLoaded:false
+    allLoaded:false,
+    bannerLists:null
+    
+   
+    
   },
   created(){
     this.getLists()
+    // this.getBanner()
+  },
+  mounted(){
+    this.getBanner()
   },
   methods:{
     getLists(){
@@ -35,9 +45,18 @@ let app = new Vue({
           this.loading = false
           this.pageSize += 1
       })
+    },
+    getBanner(){
+      axios.get(url.banner).then((res)=>{
+        this.bannerLists =res.data.lists
+       
+        
+      })
     }
   },
   components:{
-    Foot
-  }
+    Foot,
+    Swipe
+  },
+  mixins:[mixin]
 })
